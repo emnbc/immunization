@@ -1,0 +1,39 @@
+:host {
+    // display: flex !important;
+    // flex-direction: column !important;
+    height: 100% !important;
+}
+.grid-main {
+    position: relative;
+    display: flex;
+    height: 100%;
+    min-width: 1060px;
+    flex-direction: column;
+    &__header {
+        position: absolute;
+        height: 60px;
+        min-width: 100%;
+    }
+    &__content {
+        flex: 1 0 auto;
+        flex-direction: row;
+        display: flex;
+        background-color: #f5f5f5;
+    }
+    &__footer {
+        flex: 0 0 60px;
+        min-width: 100%;
+    }
+}
+.grid-content {
+    &__aside {
+        flex: 0 0 270px;
+        padding: 80px 0 20px;
+        background-color: #ffffff;
+        border-right: 1px solid rgba(0, 0, 0, 0.125);
+    }
+    &__content {
+        flex: 1;
+        padding: 80px 20px 20px;
+    }
+}

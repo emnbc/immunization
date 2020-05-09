@@ -1,0 +1,18 @@
+<div class="card mb-3">
+    <div class="card-body">
+        Gender: Man, Woman
+        <div class="donut-container">
+            <ngx-charts-pie-chart
+            [results]="donut | async"
+            [gradient]="false"
+            [legend]="true"
+            legendPosition="right"
+            [labels]="false"
+            [doughnut]="true"
+            [arcWidth]="0.50"
+            (select)="onSelect($event)"
+            >
+        </ngx-charts-pie-chart>
+        </div>
+    </div>
+</div>

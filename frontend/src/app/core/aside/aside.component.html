@@ -1,0 +1,11 @@
+<div class="list-group list-group-flush aside-nav">
+  <div *ngFor="let route of routes.routeConfig.children">
+    <a  *ngIf="route.data.navVisible"
+        routerLink="/{{ route.path }}"
+        routerLinkActive="list-group-item-secondary aside-nav-selected"
+        [routerLinkActiveOptions]="{exact:true}"
+        class="list-group-item list-group-item-action">
+      <i class="fa text-muted mr-4 {{ route.data.icon }}"></i>{{ route.data.name }}
+    </a>
+  </div>
+</div>

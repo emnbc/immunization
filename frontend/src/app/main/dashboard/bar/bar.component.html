@@ -1,0 +1,19 @@
+<div class="card mb-3">
+    <div class="card-body">
+        Registrition: day, weeks, months
+        <div class="bar-container">
+            <ngx-charts-bar-vertical
+            [results]="bar | async"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Patients"
+            yAxisLabel="Registrations"
+            (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+        </div>
+    </div>
+</div>

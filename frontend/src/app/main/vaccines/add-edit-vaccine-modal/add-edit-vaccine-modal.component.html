@@ -1,0 +1,52 @@
+<ng-template #content let-modal>
+  <form>
+  <div class="modal-header">
+
+    <h4 *ngIf="formsData._id; else elseTitle" class="modal-title">Edit vaccine<span class="badge badge-secondary ml-2">New</span></h4>
+    <ng-template #elseTitle>
+      <h4 class="modal-title">Add new vaccine<span class="badge badge-secondary ml-2">New</span></h4>
+    </ng-template>
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label for="nameForm">Name</label>
+      <input  type="text"
+              class="form-control"
+              id="nmeForm"
+              name="nameForm"
+              [(ngModel)]="formsData.name"
+              required>
+    </div>
+    <div class="form-group">
+      <label for="descriptionForm">Description</label>
+      <input  type="text" 
+              class="form-control"
+              id="descriptionForm"
+              name="descriptionForm"
+              [(ngModel)]="formsData.description"
+              aria-describedby="descriptionHelp"
+              required>
+      <small id="descriptionHelp" class="form-text text-muted">Enter a description of the vaccine or its full name</small>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button *ngIf="formsData._id; else elseButton" [disabled]="sendLoading" type="button" class="btn btn-theme-primary" (click)="sendData()">
+      <span *ngIf="sendLoading">Editing...</span>
+      <span *ngIf="!sendLoading">Edit</span>
+    </button>
+    <ng-template #elseButton>
+      <button [disabled]="sendLoading" type="button" class="btn btn-theme-primary" (click)="sendData()">
+        <span *ngIf="sendLoading">Creating...</span>
+        <span *ngIf="!sendLoading">Create</span>
+      </button>
+    </ng-template>
+    <button type="button" ngbAutofocus class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</form>
+</ng-template>

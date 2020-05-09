@@ -1,0 +1,19 @@
+.aside-nav {
+    &-selected {
+        width: 100%;
+        color: #495057;
+        text-align: inherit;
+        box-shadow: 5px 0 0 #abafb3;
+    }
+    & a {
+        outline: none;
+    }
+}
+.aside-nav .list-group-item-secondary.list-group-item-action:focus {
+    color: #383d41;
+    background-color: #d6d8db;
+}
+.aside-nav .list-group-item-action:active {
+    color: #495057;
+    background-color: #f8f9fa;
+}

@@ -1,0 +1,24 @@
+<div class="grid-main">
+
+  <div class="grid-main__header">
+    <ng-lazy-progress color="#ffc107" [progress]="progress"></ng-lazy-progress>
+    <app-header></app-header>
+  </div>
+
+  <main role="main" class="grid-main__content">
+
+    <div class="grid-content__aside">
+      <app-aside></app-aside>
+    </div>
+
+    <div class="grid-content__content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </main>
+
+  <div class="grid-main__footer">
+    <app-footer></app-footer>
+  </div>
+
+</div>

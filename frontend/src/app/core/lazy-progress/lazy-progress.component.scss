@@ -1,0 +1,29 @@
+.lazy-progress-bar {
+    position: fixed;
+    height: 3px;
+    width: 100%;
+    background-color: transparent;
+    z-index: 10;
+    & div {
+        width: 0;
+        height: 100%;
+        &.start {
+            animation: start 5000ms forwards;
+        }
+        &.end {
+            animation: end 500ms forwards;
+        }
+    }
+}
+
+@keyframes start {
+    from { width: 0; }
+    10% { width: 13%; }
+    to { width: 15%; }
+}
+@keyframes end {
+    from { width: 15%; opacity: 1; }
+    60% { width: 100%; opacity: 1; }
+    98% { width: 100%; opacity: 0; }
+    to { width: 0; opacity: 0; }
+}

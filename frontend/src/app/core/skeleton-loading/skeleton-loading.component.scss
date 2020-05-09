@@ -1,0 +1,40 @@
+.loader {
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+  
+    animation: progress 800ms ease-in-out infinite;
+    background: rgb(0, 0, 0) no-repeat;
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0)
+    );
+    background-size: 200px 100%;
+    border-radius: 4px;
+    height: 1em;
+    top: .15em;
+    display: inline-block;
+  
+    &:after,
+    &:before {
+      box-sizing: border-box;
+    }
+  
+    &.circle {
+      width: 40px;
+      height: 40px;
+      margin: 5px;
+      border-radius: 50%;
+    }
+  }
+  
+  @keyframes progress {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }

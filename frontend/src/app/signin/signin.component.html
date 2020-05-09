@@ -1,0 +1,31 @@
+<div class="signin-container">
+  <form class="form-signin">
+    <h1 class="h3 mb-3 font-weight-normal">Please Sign in</h1>
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input  type="text"
+            id="inputUsername"
+            name="username"
+            class="form-control theme"
+            placeholder="Username"
+            [(ngModel)]="authData.username"
+            autocomplete="off"
+            required
+            autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input  type="password"
+            id="inputPassword"
+            name="password"
+            class="form-control theme mb-1"
+            placeholder="Password"
+            [(ngModel)]="authData.password"
+            required>
+    <div *ngIf="error" class="text-danger" role="alert">
+      Login or password incorrect!
+    </div>
+    <button [disabled]="loading" class="btn theme btn-lg btn-theme-primary btn-block mt-4" (click)="login()">
+      <span *ngIf="!loading">Sign in</span>
+      <span *ngIf="loading"> Checking...</span>
+    </button>
+    <p class="mt-5 mb-0">&copy; Immunization</p>
+  </form>
+</div>

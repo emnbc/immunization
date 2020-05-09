@@ -1,0 +1,22 @@
+<input  (focus)="focus()" 
+        (focusout)="focusOut()"
+        (keyup)="getSuggestions()"
+        [(ngModel)]="inputValue"
+        name="autocomplete"
+        type="text"
+        class="form-control"
+        autocomplete="off">
+<div *ngIf="isOpen" class="position-relative">
+  <ul *ngIf="loading; else elseBlock" class="list-group position-absolute w-100 shadow on-front">
+    <li class="list-group-item list-group-item-action">
+      Loading...
+    </li>
+  </ul>
+  <ng-template #elseBlock>
+    <ul class="list-group position-absolute w-100 shadow on-front">
+      <li *ngFor="let result of results" class="list-group-item list-group-item-action pointer" (click)="selected(result)">
+        {{ handleSuggestion(result) }}
+      </li>
+    </ul>
+  </ng-template>
+</div>
