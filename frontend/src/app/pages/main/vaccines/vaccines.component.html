@@ -1,0 +1,40 @@
+<vaccine-modal (data)="handleQueryVaccine($event)"></vaccine-modal>
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span class="head-text">Vaccines</span>
+    <button class="btn btn-sm btn-theme-primary text-nowrap" (click)="openModal()"><i class="fa fa-user-plus mr-1"></i>Add vaccine</button>
+  </div>
+  <div class="card-body position-relative">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="w-25" scope="col"><sorting field="name" [currentState]="sortingState" (result)="changeSorting($event)">Name</sorting></th>
+          <th class="w-25" scope="col"><sorting field="description" [currentState]="sortingState" (result)="changeSorting($event)">Description</sorting></th>
+          <th class="w-25" scope="col"><sorting field="date" [currentState]="sortingState" (result)="changeSorting($event)">Date</sorting></th>
+          <th class="w-25" scope="col">VaccineID</th>
+        </tr>
+      </thead>
+      <tbody class="tbody-muted" [class.deactivate]="!changing">
+        <tr *ngFor="let vaccine of vaccines; trackBy: trackById;" class="pointer" (click)="openModal(vaccine)">
+          <td><span *ngIf="vaccine.name">{{ vaccine.name }}</span></td>
+          <td><span *ngIf="vaccine.description">{{ vaccine.description }}</span></td>
+          <td><span *ngIf="vaccine.date">{{ vaccine.date | date:'medium' }}</span></td>
+          <td><span *ngIf="vaccine._id">{{ vaccine._id }}</span></td>
+        </tr>
+        <tr [hidden]="!loading" class="tbody-loading">
+          <td class="text-center" colspan="4">Loading...</td>
+        </tr>
+      </tbody>
+    </table>
+    <ngb-pagination (pageChange)="pageChange($event)"
+                    [collectionSize]="totalCount"
+                    [(page)]="page"
+                    [maxSize]="5"
+                    [pageSize]="size"
+                    [rotate]="true"
+                    [boundaryLinks]="true" size="sm">
+                    <ng-template ngbPaginationFirst>First</ng-template>
+                    <ng-template ngbPaginationLast>Last</ng-template>
+    </ngb-pagination>
+  </div>
+</div>

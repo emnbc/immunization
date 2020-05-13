@@ -9,15 +9,7 @@ export class AuthService {
 
   private _token: string = null;
 
-  user$ = new BehaviorSubject<User>({
-    _id: null,
-    username: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    birthDate: null,
-    registerDate: null
-  });
+  user$ = new BehaviorSubject<User>(new User());
 
   get token(): string {
     if(this._token) return this._token;
@@ -45,15 +37,7 @@ export class AuthService {
   logOut(): void {
     this.token = null;
     localStorage.removeItem('token');
-    this.user$.next({
-      _id: null,
-      username: null,
-      firstName: null,
-      lastName: null,
-      email: null,
-      birthDate: null,
-      registerDate: null
-    });
+    this.user$.next(new User());
   }
 
 }

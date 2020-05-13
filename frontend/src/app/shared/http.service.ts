@@ -18,7 +18,7 @@ export class HttpService {
     return this.http.post(`${environment.apiUrl}/login`, authData);
   }
 
-  get<T>(url: string, paramsList?: IParams[]): Observable<HttpResponse<T>> {
+  get<T>(url: string, paramsList?: Param[]): Observable<HttpResponse<T>> {
     return this.http.get<T>(`${environment.apiUrl}/${url}`, { observe: 'response', ...paramsList && {params: this.setParams(paramsList)} });
   }
 
@@ -42,7 +42,7 @@ export class HttpService {
     return this.http.delete(`${environment.apiUrl}/artists/${id}`);
   }
 
-  setParams(paramsList?: IParams[]): any {
+  setParams(paramsList?: Param[]): any {
     let params = new HttpParams();
     for(const param of paramsList) {
       if(param.value) params = params.set(param.key, param.value.toString());
@@ -52,7 +52,7 @@ export class HttpService {
 
 }
 
-export interface IParams {
+export interface Param {
   key: string;
   value: string | number;
 }
