@@ -1,0 +1,105 @@
+<ng-template #content let-modal>
+  <form #addPatientForm="ngForm">
+  <div class="modal-header">
+
+    <h4 *ngIf="patient._id; else elseTitle" class="modal-title">Edit patient<span class="badge badge-secondary ml-2">Patient</span></h4>
+    <ng-template #elseTitle>
+      <h4 class="modal-title">Adding a new patient<span class="badge badge-secondary ml-2">Patient</span></h4>
+    </ng-template>
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="alert alert-warning" role="alert">
+      <i class="fa fa-exclamation-triangle mr-1" aria-hidden="true"></i> Warning! All fields are required.
+    </div>
+  
+    <hr>
+
+    <div class="form-group">
+      <label for="lastNameForm">Surname</label>
+      <input  type="text"
+              class="form-control {{ isRequired('lastName') }}"
+              id="lastNameForm"
+              name="lastNameForm"
+              aria-describedby="lastNameHelp"
+              (change)="change()"
+              [(ngModel)]="patient.lastName"
+              autocomplete="off">
+      <small id="lastNameHelp" class="form-text text-muted">Only the real surname</small>
+    </div>
+    <div class="form-group">
+      <label for="nameForm">Name</label>
+      <input  type="text"
+              class="form-control {{ isRequired('firstName') }}"
+              id="nameForm"
+              name="nameForm"
+              (change)="change()"
+              [(ngModel)]="patient.firstName"
+              autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label for="birthDateForm">Birth date</label>
+      <div class="input-group font-weight-normal">
+        <input  class="form-control {{ isRequired('birthDate') }}"
+                placeholder="DD.MM.YYYY"
+                id="birthDateForm"
+                [minDate]="{ year: date.getFullYear()-100, month: 1, day: 1 }"
+                [maxDate]="{ year: date.getFullYear(), month: 12, day: 31 }"
+                autocomplete="off"
+                name="dp"
+                (dateSelect)="change()"
+                [(ngModel)]="patient.birthDate"
+                ngbDatepicker
+                #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="sexForm">Gender</label>
+      <select class="custom-select {{ isRequired('sex') }}"
+              id="sexForm"
+              name="sexForm"
+              (change)="change()"
+              [(ngModel)]="patient.sex">
+        <option [ngValue]="1">Male</option>
+        <option [ngValue]="2">Female</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="phoneForm">Phone</label>
+      <input  [textMask]="{mask: phoneMask}"
+              placeholder="(___) ___-__-__"
+              type="text"
+              class="form-control {{ isRequired('phone') }}"
+              id="phoneForm"
+              name="phoneForm"
+              aria-describedby="phoneHelp"
+              autocomplete="off"
+              (change)="change()"
+              [(ngModel)]="patient.phone">
+      <small id="phoneHelp" class="form-text text-muted">Patient's phone number</small>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button *ngIf="patient._id; else elseButton" [disabled]="sendLoading" type="button" class="btn btn-theme-primary" (click)="sendData()">
+      <span *ngIf="sendLoading">Editing...</span>
+      <span *ngIf="!sendLoading">Edit</span>
+    </button>
+    <ng-template #elseButton>
+      <button [disabled]="sendLoading" type="button" class="btn btn-theme-primary" (click)="sendData()">
+        <span *ngIf="sendLoading">Creating...</span>
+        <span *ngIf="!sendLoading">Create</span>
+      </button>
+    </ng-template>
+    <button type="button" ngbAutofocus class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</form>
+</ng-template>

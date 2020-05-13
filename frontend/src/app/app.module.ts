@@ -5,7 +5,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthInterceptor } from './shared/auth.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 import { SharedModule } from './shared/shared.module';
 

@@ -1,0 +1,64 @@
+<ng-template #content let-modal>
+  <form>
+  <div class="modal-header">
+
+    <h4 *ngIf="vaccination?._id; else elseTitle" class="modal-title">Edit vaccination<span class="badge badge-secondary ml-2">Vaccination</span></h4>
+    <ng-template #elseTitle>
+      <h4 class="modal-title">Add a new vaccination<span class="badge badge-secondary ml-2">Vaccination</span></h4>
+    </ng-template>
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label>Vaccine</label>
+      <autocomplete (outValue)="getVaccines($event)"
+                    (selectedValue)="setVaccine($event)"
+                    [handleSuggestion]="handleVaccine.bind(this)"
+                    classes="{{ isRequired('vaccineId') }}"
+                    [results]="vaccines"
+                    [loading]="getVaccinesLoading"
+                    [default]="vaccination.vaccineName">
+      </autocomplete>
+    </div>
+    <div class="form-group">
+      <label for="statusForm">Status vaccination</label>
+      <select class="custom-select {{ isRequired('status') }}"
+              id="statusForm"
+              name="status"
+              (change)="change()"
+              [(ngModel)]="vaccination.status">
+        <option [ngValue]="1">Assigned</option>
+        <option [ngValue]="2">Completed</option>
+        <option [ngValue]="3">Cancelled</option>
+      </select>
+      <small class="form-text text-muted">Current state</small>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input  type="checkbox"
+              class="custom-control-input"
+              id="checkForm"
+              name="checkForm"
+              [(ngModel)]="vaccination.agree">
+      <label class="custom-control-label" for="checkForm">The patient agrees</label>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button *ngIf="vaccination?._id; else elseButton" [disabled]="sendLoading" type="button" class="btn btn-theme-primary" (click)="sendData()">
+      <span *ngIf="sendLoading">Editing...</span>
+      <span *ngIf="!sendLoading">Edit</span>
+    </button>
+    <ng-template #elseButton>
+      <button [disabled]="sendLoading" type="button" class="btn btn-theme-primary" (click)="sendData()">
+        <span *ngIf="sendLoading">Creating...</span>
+        <span *ngIf="!sendLoading">Create</span>
+      </button>
+    </ng-template>
+    <button type="button" ngbAutofocus class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</form>
+</ng-template>

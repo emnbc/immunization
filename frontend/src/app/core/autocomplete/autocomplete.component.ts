@@ -14,6 +14,7 @@ export class AutocompleteComponent implements OnInit {
   @Input() default?: string = null;
   @Input() loading?: boolean = false;
   @Input() handleSuggestion: (val: any) => string;
+  @Input() classes?: string = '';
 
   @Output() outValue: EventEmitter<any> = new EventEmitter<string>();
   @Output() selectedValue: EventEmitter<any> = new EventEmitter<any>();

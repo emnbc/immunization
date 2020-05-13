@@ -4,7 +4,7 @@
         [(ngModel)]="inputValue"
         name="autocomplete"
         type="text"
-        class="form-control"
+        class="form-control {{ classes }}"
         autocomplete="off">
 <div *ngIf="isOpen" class="position-relative">
   <ul *ngIf="loading; else elseBlock" class="list-group position-absolute w-100 shadow on-front">

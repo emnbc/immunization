@@ -1,0 +1,114 @@
+<ng-template #content let-modal>
+  <form>
+  <div class="modal-header">
+
+    <h4 *ngIf="user._id; else elseTitle" class="modal-title">Edit user<span class="badge badge-secondary ml-2">User</span></h4>
+    <ng-template #elseTitle>
+      <h4 class="modal-title">Add a new user<span class="badge badge-secondary ml-2">User</span></h4>
+    </ng-template>
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+  <div class="alert alert-warning" role="alert">
+    <i class="fa fa-exclamation-triangle mr-1" aria-hidden="true"></i> Warning! All fields are required.
+  </div>
+
+  <hr>
+
+  <div class="form-group">
+    <label for="emailForm">Email</label>
+    <input  type="email"
+            class="form-control {{ isRequired('email') }}"
+            id="emailForm"
+            autocomplete="off"
+            (change)="change()"
+            [(ngModel)]="user.email"
+            name="emailForm">
+  </div>
+
+  <div class="form-group">
+    <label for="usernameForm">Username</label>
+    <input  type="text"
+            class="form-control {{ isRequired('username') }}"
+            id="usernameForm"
+            autocomplete="off"
+            (change)="change()"
+            [(ngModel)]="user.username"
+            name="usernameForm">
+  </div>
+
+  <div class="form-group" *ngIf="!user._id">
+    <label for="passwordForm">Password</label>
+    <input  type="password" 
+            class="form-control {{ isRequired('password') }}"
+            id="passwordForm"
+            autocomplete="off"
+            (change)="change()"
+            [(ngModel)]="user.password"
+            name="passwordForm"
+            aria-describedby="passwordHelp">
+    <small id="passwordHelp" class="form-text text-muted">Enter a password of the username or its full name</small>
+  </div>
+
+  <div class="form-group">
+    <label for="firstNameForm">Name</label>
+    <input  type="text"
+            class="form-control {{ isRequired('firstName') }}"
+            id="firstNameForm"
+            autocomplete="off"
+            (change)="change()"
+            [(ngModel)]="user.firstName"
+            name="firstNameForm">
+  </div>
+
+  <div class="form-group">
+    <label for="lastNameForm">Surname</label>
+    <input  type="text"
+            class="form-control {{ isRequired('lastName') }}"
+            id="lastNameForm"
+            autocomplete="off"
+            (change)="change()"
+            [(ngModel)]="user.lastName"
+            name="lastNameForm">
+  </div>
+
+  <div class="form-group">
+    <label for="birthDateForm">Birth date</label>
+    <div class="input-group">
+      <input  type="text"
+              class="form-control {{ isRequired('birthDate') }}"
+              id="birthDateForm"
+              autocomplete="off"
+              [(ngModel)]="user.birthDate"
+              name="birthDateForm"
+              (dateSelect)="change()"
+              [minDate]="{ year: date.getFullYear()-100, month: 1, day: 1 }"
+              [maxDate]="{ year: date.getFullYear(), month: 12, day: 31 }"
+              ngbDatepicker
+              #d="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+  
+</div>
+  <div class="modal-footer">
+    <button *ngIf="user._id; else elseButton" [disabled]="sendLoading" type="button" class="btn btn-theme-primary" (click)="sendData()">
+      <span *ngIf="sendLoading">Editing...</span>
+      <span *ngIf="!sendLoading">Edit</span>
+    </button>
+    <ng-template #elseButton>
+      <button [disabled]="sendLoading" type="button" class="btn btn-theme-primary" (click)="sendData()">
+        <span *ngIf="sendLoading">Creating...</span>
+        <span *ngIf="!sendLoading">Create</span>
+      </button>
+    </ng-template>
+    <button type="button" ngbAutofocus class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</form>
+</ng-template>
