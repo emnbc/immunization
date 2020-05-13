@@ -28,22 +28,33 @@ exports.getMe = (username, cb) => {
 }
 
 exports.create = (user, cb) => {
-    db.get().collection('users').insertOne(user, (err, result) => {
-        setTimeout(() => { // fake server dalay 
-            cb(err, result);
-        }, 250);
+    db.get().collection('users').findOne({ username: user.username }, (err, doc) => {
+        if(doc) {
+            cb({ code: 409, error: 'User alrady exist' }, null);
+        } else {
+            db.get().collection('users').insertOne(user, (err, result) => {
+                setTimeout(() => { // fake server dalay 
+                    cb(err, result);
+                }, 250);
+            });
+        }
     });
 }
 
 exports.update = (id, user, cb) => {
-    console.log(id);
-    db.get().collection('users').updateOne(
-        { _id: ObjectID(id) }, { $set: user}, (err, result) => {
-            setTimeout(() => { // fake server dalay 
-                cb(err, result);
-            }, 250);
+    db.get().collection('users').findOne({ username: user.username }, (err, doc) => {
+        if(doc) {
+            cb({ code: 409, error: 'User alrady exist' }, null);
+        } else {
+            db.get().collection('users').updateOne(
+                { _id: ObjectID(id) }, { $set: user}, (err, result) => {
+                    setTimeout(() => { // fake server dalay 
+                        cb(err, result);
+                    }, 250);
+                }
+            );
         }
-    );
+    });
 }
 
 

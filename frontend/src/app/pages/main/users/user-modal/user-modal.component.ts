@@ -21,6 +21,8 @@ export class UserModalComponent {
   sendLoading: boolean = false;
   user: User;
   date = new Date();
+  errorMessage: string;
+  
 
   @ViewChild('content', {static: false}) content: any;
   @Output() data = new EventEmitter<User>();
@@ -30,6 +32,7 @@ export class UserModalComponent {
     ) { }
 
   open(user?: User) {
+    this.errorMessage = null;
     this.validate = true;
     if(user) {
       this.user = new User(JSON.parse(JSON.stringify(user)));
@@ -48,6 +51,7 @@ export class UserModalComponent {
     this.validate = this.user.validate();
     this.sendLoading = true;
     if(this.validate === true) {
+      this.errorMessage = null;
       this.data.emit(this.user);
     } else {
       this.sendLoading = false;

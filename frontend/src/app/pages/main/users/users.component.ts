@@ -56,6 +56,11 @@ export class UsersComponent implements OnInit {
       this.modal.sendLoading = false;
       this.changing = true;
       this.getUsers(this.page, this.size);
+    }, err => {
+      this.modal.sendLoading = false;
+      if(err.status === 409) {
+        this.modal.errorMessage = 'User already exist';
+      }
     });
   }
 
@@ -65,6 +70,11 @@ export class UsersComponent implements OnInit {
       this.modal.sendLoading = false;
       this.changing = true;
       this.getUsers(this.page, this.size);
+    }, err => {
+      this.modal.sendLoading = false;
+      if(err.status === 409) {
+        this.modal.errorMessage = 'User already exist';
+      }
     });
   }
 

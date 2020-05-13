@@ -64,8 +64,13 @@ exports.create = (req, res) => {
     };
     Users.create(user, (err, result) => {
         if(err) {
-            console.log(err);
-            return res.sendStatus(500);
+            if(err.code === 409) {
+                console.log(err);
+                return res.sendStatus(409);
+            } else {
+                console.log(err);
+                return res.sendStatus(500);
+            }
         }
         res.send(user);
     });
@@ -79,10 +84,18 @@ exports.update = (req, res) => {
         lastName: req.body.lastName,
         birthDate: req.body.birthDate
     };
+    if(req.params.id === '5ea094b8ce7d17061cb0957b' || req.params.id === '5e900d08e1f56e128cf1cf56') {
+        return res.sendStatus(400);
+    }
     Users.update(req.params.id, user, (err, result) => {
         if(err) {
-            console.log(err);
-            return res.sendStatus(500);
+            if(err.code === 409) {
+                console.log(err);
+                return res.sendStatus(409);
+            } else {
+                console.log(err);
+                return res.sendStatus(500);
+            }
         }
         res.send(user);
     });
