@@ -48,7 +48,7 @@ exports.getMe = (req, res) => {
             console.log(err);
             return res.sendStatus(500);
         }
-        res.send({ _id: doc._id, username: doc.username });
+        res.send({ _id: doc._id, username: doc.username, firstName: doc.firstName, lastName: doc.lastName });
     });
 }
 

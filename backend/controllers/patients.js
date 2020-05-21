@@ -45,8 +45,7 @@ exports.update = (req, res) => {
         lastName: req.body.lastName,
         birthDate: req.body.birthDate,
         sex: req.body.sex,
-        phone: req.body.phone,
-        registerDate: new Date(req.body.registerDate)
+        phone: req.body.phone
     };
     Patients.update(req.params.id, patient, (err, result) => {
         if(err) {

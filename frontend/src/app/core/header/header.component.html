@@ -2,7 +2,7 @@
   <!-- Fixed navbar -->
   <nav class="h-100 navbar navbar-expand-md nav-top">
     <!-- <div class="container"> -->
-        <a href="#"><i class="fa fa-heartbeat mr-2 red-logo"></i><span class="text-uppercase">Immunization</span></a>
+        <a class="logo" href="#"><i class="fa fa-heartbeat mr-2"></i><span class="text-uppercase">Immunization</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,7 +10,8 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item"></li>
           </ul>
-          <ul class="navbar-nav">
+          <ul class="navbar-nav d-flex align-items-center">
+            <li class="nav-item mr-4" *ngIf="user.firstName && user.lastName"><i class="fa fa-user mr-2"></i>{{ user.firstName }} {{ user.lastName }}</li>
             <li class="nav-item">
               <a class="nav-link link-out active" (click)="logOut()"><i class="fa fa-sign-out mr-2"></i>Logout</a>
             </li>
