@@ -85,6 +85,15 @@
               [(ngModel)]="patient.phone">
       <small id="phoneHelp" class="form-text text-muted">Patient's phone number</small>
     </div>
+    <div class="form-group">
+      <label for="registerDateForm">Registration</label>
+      <input  type="text"
+              class="form-control"
+              id="registerDateForm"
+              name="registerDateForm"
+              [(ngModel)]="patient.registerDate"
+              autocomplete="off">
+    </div>
 
   </div>
 
